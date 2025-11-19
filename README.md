@@ -7,8 +7,9 @@ This project enhances the user experience of an e-commerce website by adding adv
 - Category, Brand, Price, Rating, In-stock Filters  
 - Sort by Price, Rating, Newest  
 - Add to Cart, Update Quantity, Auto Totals  
-- 3-Step Checkout: Address → Payment → Review   
-- 
+- 3-Step Checkout: Address → Payment → Review    
+
+
 
  Tech Used
 - HTML  
