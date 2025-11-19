@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>E-commerce UX Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <h1>ShopSmart </h1>
+  <div class="cart-info">
+    Items in cart: <span id="cartCount">0</span> · Total: ₹<span id="cartTotalHeader">0</span>
+  </div>
+</header>
+
+<main>
+  <section class="layout">
+    <aside class="filters">
+      <h2>Filters</h2>
+
+      <div class="filter-group">
+        <h3>Category</h3>
+        <label><input type="checkbox" name="category" value="Clothing" /> Clothing</label>
+        <label><input type="checkbox" name="category" value="Electronics" /> Electronics</label>
+        <label><input type="checkbox" name="category" value="Accessories" /> Accessories</label>
+      </div>
+
+      <div class="filter-group">
+        <h3>Price (₹)</h3>
+        <div class="filter-inline">
+          <span>Min</span>
+          <input type="number" id="minPrice" value="0" />
+          <span>Max</span>
+          <input type="number" id="maxPrice" value="5000" />
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>Brand</h3>
+        <label><input type="checkbox" name="brand" value="Nova" /> Nova</label>
+        <label><input type="checkbox" name="brand" value="ZenWear" /> ZenWear</label>
+        <label><input type="checkbox" name="brand" value="UrbanX" /> UrbanX</label>
+        <label><input type="checkbox" name="brand" value="Pulse" /> Pulse</label>
+      </div>
+
+      <div class="filter-group">
+        <h3>Rating</h3>
+        <label><input type="radio" name="rating" value="0" checked /> Any rating</label>
+        <label><input type="radio" name="rating" value="4" /> 4★ & above</label>
+        <label><input type="radio" name="rating" value="3" /> 3★ & above</label>
+      </div>
+
+      <div class="filter-group">
+        <h3>Availability</h3>
+        <label><input type="checkbox" id="inStockOnly" /> In stock only</label>
+      </div>
+    </aside>
+
+    <section class="product-area">
+      <div>
+        <div class="chips" id="appliedFilters"></div>
+        <button class="btn-clear" id="clearFilters">Clear all filters</button>
+      </div>
+
+      <div class="product-header">
+        <div>
+          <h2>Products</h2>
+          <small id="productCountText">Showing 0 products</small>
+        </div>
+        <div>
+          <select id="sortSelect">
+            <option value="default">Sort by: Featured</option>
+            <option value="priceLowToHigh">Price: Low to High</option>
+            <option value="priceHighToLow">Price: High to Low</option>
+            <option value="ratingHighToLow">Rating: High to Low</option>
+            <option value="newest">Newest</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <aside class="cart">
+      <h2>Cart <span class="badge" id="cartBadge">Empty</span></h2>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-summary">
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span>₹<span id="cartSubtotal">0</span></span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Shipping</span>
+          <span>₹<span id="shipping">99</span></span>
+        </div>
+        <div class="cart-summary-row total">
+          <span>Total</span>
+          <span>₹<span id="cartTotal">0</span></span>
+        </div>
+        <button class="btn btn-primary" id="checkoutBtn">Proceed to Checkout</button>
+      </div>
+    </aside>
+  </section>
+
+  <section class="checkout" id="checkoutSection">
+    <div class="checkout-header">
+      <h2>Checkout</h2>
+      <div class="progress">
+        <div class="step" data-step="1">
+          <div class="step-circle">1</div>
+          <div class="step-label">Address</div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-circle">2</div>
+          <div class="step-label">Payment</div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Review</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checkout-step" id="step1">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Full Name *</label>
+          <input type="text" id="fullName" />
+          <small class="error" id="errName"></small>
+        </div>
+        <div class="form-field">
+          <label>Phone *</label>
+          <input type="text" id="phone" placeholder="10-digit number" />
+          <small class="error" id="errPhone"></small>
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="optional" />
+          <small class="error" id="errEmail"></small>
+        </div>
+        <div class="form-field">
+          <label>Pincode *</label>
+          <input type="text" id="pincode" />
+          <small class="error" id="errPincode"></small>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Address Line *</label>
+          <input type="text" id="addressLine" />
+          <small class="error" id="errAddress"></small>
+        </div>
+        <div class="form-field">
+          <label>City *</label>
+          <input type="text" id="city" />
+          <small class="error" id="errCity"></small>
+        </div>
+        <div class="form-field">
+          <label>State *</label>
+          <input type="text" id="state" value="West Bengal" />
+          <small class="error" id="errState"></small>
+        </div>
+      </div>
+
+      <div class="checkout-footer">
+        <span></span>
+        <button class="btn btn-primary" id="toStep2">Continue to Payment →</button>
+      </div>
+    </div>
+
+    <div class="checkout-step" id="step2">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Payment Method</label>
+          <select id="paymentMethod">
+            <option value="card">Card</option>
+            <option value="upi">UPI</option>
+            <option value="cod">Cash on Delivery</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="cardDetails">
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Name on Card</label>
+            <input type="text" id="cardName" />
+          </div>
+          <div class="form-field">
+            <label>Card Number</label>
+            <input type="text" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" />
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label>Expiry</label>
+            <input type="text" id="cardExpiry" placeholder="MM/YY" />
+          </div>
+          <div class="form-field">
+            <label>CVV</label>
+            <input type="password" id="cardCvv" maxlength="3" />
+          </div>
+        </div>
+      </div>
+
+      <div id="upiDetails" style="display:none;">
+        <div class="form-grid">
+          <div class="form-field">
+            <label>UPI ID</label>
+            <input type="text" id="upiId" placeholder="example@upi" />
+          </div>
+        </div>
+      </div>
+
+      <div class="secure">
+        🔒 Secure payment – demo only, no real transaction.
+      </div>
+
+      <div class="checkout-footer">
+        <button class="btn btn-secondary" id="backToStep1">← Back</button>
+        <button class="btn btn-primary" id="toStep3">Review Order →</button>
+      </div>
+    </div>
+
+    <div class="checkout-step" id="step3">
+      <h3>Order Summary</h3>
+      <table class="order-summary-table" id="orderSummaryTable"></table>
+
+      <h3>Delivery To</h3>
+      <p id="deliverySummary" style="font-size:0.9rem;"></p>
+
+      <div class="checkout-footer">
+        <button class="btn btn-secondary" id="backToStep2">← Back</button>
+        <button class="btn btn-primary" id="placeOrderBtn">Place Order ✅</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
